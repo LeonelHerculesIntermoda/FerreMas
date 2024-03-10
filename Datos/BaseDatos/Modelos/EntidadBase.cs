@@ -10,5 +10,6 @@ namespace Datos.BaseDatos.Modelos
     {
         public DateTime FechaCreacion { get; set; }
         public DateTime FechaModificacion { get; set; }
+        public DateTime FechaEliminacion { get; set; }
     }
 }
