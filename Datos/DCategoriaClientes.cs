@@ -12,11 +12,14 @@ namespace Datos
     public class DCategoriaClientes
     {
         //private FerreteriaContext context;
-        Repository<CategoriaClientes> _repository;
+        //Repository<CategoriaClientes> _repository;
+        UnitOfWork _unitOfWork;
+ 
         public DCategoriaClientes()
         {
             //context = new FerreteriaContext();
-            _repository = new Repository<CategoriaClientes>();
+            //_repository = new Repository<CategoriaClientes>();
+            _unitOfWork = new UnitOfWork();
         }
         public int CategoriaClienteId { get; set; }
         public string Codigo { get; set; }
@@ -28,7 +31,8 @@ namespace Datos
         public List<CategoriaClientes> categoriaClientesTodas() 
         {
             //return context.CategoriaClientes.ToList();
-            return _repository.Consulta().ToList();
+            //return _repository.Consulta().ToList();
+            return _unitOfWork.Repository<CategoriaClientes>().Consulta().ToList();
         }
 
         public int GuardarCategoria(CategoriaClientes categoria) 
@@ -38,13 +42,14 @@ namespace Datos
                 categoria.FechaCreacion = DateTime.Now;
                 categoria.FechaModificacion = DateTime.Now;
                 //context.CategoriaClientes.Add(categoria);
-                _repository.Agregar(categoria);
-                return 1;
+                //_repository.Agregar(categoria);
+                _unitOfWork.Repository<CategoriaClientes>().Agregar(categoria);
+                return _unitOfWork.Guardar();
             }
             else 
             {
                 //var CategoriaInDb = context.CategoriaClientes.Find(categoria.CategoriaClienteId);
-                var CategoriaInDb = _repository.Consulta().FirstOrDefault(c=>c.CategoriaClienteId == categoria.CategoriaClienteId);
+                var CategoriaInDb = _unitOfWork.Repository<CategoriaClientes>().Consulta().FirstOrDefault(c=>c.CategoriaClienteId == categoria.CategoriaClienteId);
 
                 if (CategoriaInDb != null)
                 {
@@ -52,8 +57,9 @@ namespace Datos
                     CategoriaInDb.Codigo = categoria.Codigo;
                     CategoriaInDb.Descripcion = categoria.Descripcion;
                     CategoriaInDb.Estado = categoria.Estado;
-                    _repository.Editar(CategoriaInDb);
-                    return 1;
+                    //_repository.Editar(CategoriaInDb);
+                    _unitOfWork.Repository<CategoriaClientes>().Editar(categoria);
+                    return _unitOfWork.Guardar();
                 }
                 return 0;
             }
@@ -63,11 +69,12 @@ namespace Datos
         public int EliminarCategoria(int categoriaId)
         {
             //var CategoriaInDb = context.CategoriaClientes.Find(categoriaId);
-            var CategoriaInDb = _repository.Consulta().FirstOrDefault(c => c.CategoriaClienteId == categoriaId);
+            var CategoriaInDb = _unitOfWork.Repository<CategoriaClientes>().Consulta().FirstOrDefault(c => c.CategoriaClienteId == categoriaId);
             if (CategoriaInDb != null)
             {
-                _repository.Eliminar(CategoriaInDb);
-                return 1;
+                //_repository.Eliminar(CategoriaInDb);
+                _unitOfWork.Repository<CategoriaClientes>().Eliminar(CategoriaInDb);
+                return _unitOfWork.Guardar();
             }
             return 0;
         }

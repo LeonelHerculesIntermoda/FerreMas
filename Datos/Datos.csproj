@@ -58,7 +58,9 @@
     <Compile Include="BaseDatos\Modelos\GrupoDescuentoCliente.cs" />
     <Compile Include="BaseDatos\Modelos\Proveedor.cs" />
     <Compile Include="Core\IRepository.cs" />
+    <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Repository.cs" />
+    <Compile Include="Core\UnitOfWork.cs" />
     <Compile Include="DCategoriaClientes.cs" />
     <Compile Include="DClientes.cs" />
     <Compile Include="DGrupoDescuentoCliente.cs" />
@@ -86,6 +88,10 @@
     <Compile Include="Migrations\202403101748165_AdicionRelacionGrupoDescuentoCliente2.designer.cs">
       <DependentUpon>202403101748165_AdicionRelacionGrupoDescuentoCliente2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202403171835318_CambiosFinales.cs" />
+    <Compile Include="Migrations\202403171835318_CambiosFinales.designer.cs">
+      <DependentUpon>202403171835318_CambiosFinales.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -111,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202403101748165_AdicionRelacionGrupoDescuentoCliente2.resx">
       <DependentUpon>202403101748165_AdicionRelacionGrupoDescuentoCliente2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403171835318_CambiosFinales.resx">
+      <DependentUpon>202403171835318_CambiosFinales.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
