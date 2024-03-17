@@ -9,17 +9,18 @@ namespace Datos.Core
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly FerreteriaContext dbcontext;
+        public FerreteriaContext dbcontext;
 
         public Repository()
         {
-            dbcontext = new FerreteriaContext();
+            //dbcontext = new FerreteriaContext();
+            //dbcontext = _dbcontex;
         }
 
         public void Agregar(T entidad)
         {
             dbcontext.Set<T>().Add(entidad);
-            dbcontext.SaveChanges();
+            //dbcontext.SaveChanges();
         }
 
         public void AgregarRango(IEnumerable<T> entidades)
@@ -36,13 +37,13 @@ namespace Datos.Core
         public void Editar(T entidad)
         {
             dbcontext.Set<T>();
-            dbcontext.SaveChanges();
+            //dbcontext.SaveChanges();
         }
 
         public void Eliminar(T entidad)
         {
             dbcontext.Set<T>().Remove(entidad);
-            dbcontext.SaveChanges();
+          //  dbcontext.SaveChanges();
         }
     }
 }
